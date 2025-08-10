@@ -1,36 +1,36 @@
 <template>
   <aside
     ref="asideRef"
-    class="w-80 min-h-screen p-4 flex flex-col justify-between bg-secondary-bg text-secondary-text border-r"
+    class="w-80 min-h-screen p-4 flex flex-col justify-between border"
   >
     <div>
       <div
-        class="mb-6 text-center text-2xl font-bold pb-3 border-b border-accent select-none"
+        class="flex flex-col justify-center items-center  w-full mb-6 text-center text-2xl font-bold pb-3 border-b border-accent "
       >
-        پنل ادمین
-
-        <!-- دکمه X برای بستن سایدبار -->
-        <button
-          @click="$emit('close')"
-          aria-label="بستن سایدبار"
-          class="absolute top-4 left-4 text-secondary-text hover:text-accent focus:outline-none"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-6 h-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
+       <img class="w-[30%]" src="@/assets/images/dripper.png" alt="">
+       <span>Codding Coffe</span>
       </div>
+      <!-- دکمه X برای بستن سایدبار -->
+      <button
+        @click="$emit('close')"
+        aria-label="بستن سایدبار"
+        class="block md:hidden absolute top-4 left-4 text-primary-text hover:text-accent focus:outline-none"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
 
       <nav class="flex flex-col gap-4 text-base">
         <RouterLink
@@ -52,17 +52,7 @@
       </nav>
     </div>
 
-    <div
-      class="rounded-xl flex flex-col items-center bg-primary-bg text-primary-text p-3"
-    >
-      <span class="font-bold"> خروج </span>
-      <p class="text-xs my-2">لورم ایپسوم لورم لورم لورم ایپسوم</p>
-      <button
-        class="rounded-sm bg-secondary-bg px-3 py-1 text-xs text-secondary-text"
-      >
-        خروج
-      </button>
-    </div>
+  
   </aside>
 </template>
 

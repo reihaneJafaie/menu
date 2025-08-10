@@ -1,6 +1,6 @@
 <template>
     <!-- محتوای اصلی -->
-    <div class="w-[80%] mx-auto my-7">
+    <div class="">
       <div class="flex justify-between items-center mb-6">
         <h1 class="text-xl font-bold">لیست دسته‌بندی‌ها</h1>
         <RouterLink

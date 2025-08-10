@@ -1,7 +1,8 @@
 <template>
-  <main class="flex flex-col md:flex-row h-[100vh]">
+  <main class="flex flex-col md:flex-row h-screen">
+
     <div
-      class="w-full md:w-3/6 flex justify-center items-center p-6 md:p-0"
+      class="w-full md:w-3/6 flex justify-center items-center p-6 md:p-0 h-full"
     >
       <div
         class="shadow-2xl rounded-2xl w-full max-w-md flex flex-col justify-center p-6"
@@ -47,8 +48,10 @@
     <div
       class="hidden md:block w-3/6 imgbox bg-cover bg-center"
     ></div>
+
   </main>
 </template>
+
 
 
 <script setup>

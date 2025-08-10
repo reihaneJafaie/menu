@@ -10,11 +10,13 @@
 :root {
   --color-primary-bg: #f8f9fa;
   --color-secondary-bg: #1E3A8A;
-  --color-accent: #334155;       
-  --color-primary-text: #1a1a1a;
+  --color-accent: #3b75c5;       
+  --color-primary-text: #1E3A8A;
   --color-secondary-text: #f3f4f6;
   --color-success: #16a34a;   
   --color-danger: #dc2626;    
+
+  
 }
 
 body {
@@ -25,29 +27,23 @@ body {
   padding: 0;
   min-height: 100vh;
 }
-
-table {
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-tbody tr:hover {
-  background-color: #e5e7eb;
-}
-
 .sidebar-active {
   background-color: var(--color-primary-bg);
   color: var(--color-primary-text);
   border-right: 4px solid var(--color-accent);
 }
 
-.btn {
-  transition: all 0.2s ease-in-out;
-}
 
-.btn:hover {
-  transform: translateY(-1px);
-}
+.btn {
+   transition: all 0.2s ease-in-out;
+ }
+ 
+ .btn:hover {
+   transform: translateY(-1px);
+ }
+
+
+
 
 
 .bg-primary-bg {

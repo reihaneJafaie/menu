@@ -2,10 +2,16 @@
 import { ref, onMounted, onBeforeUnmount, watch } from "vue";
 import { useRoute } from "vue-router";
 import Sidebar from "./components/shared/Sidebar.vue";
-import TimeDisplay from './components/shared/TimeDisplay.vue'
+import TimeDisplay from "./components/shared/TimeDisplay.vue";
+import modeIcon from './components/icons/mod.vue';
+import logoutIcon from './components/icons/logout.vue'
+
+
 const route = useRoute();
 const sidebarOpen = ref(false);
 const sidebarRef = ref(null); // 1. تعریف ref برای سایدبار
+
+
 
 // ... (توابع تبدیل تاریخ و آپدیت زمان که قبلاً بود)
 
@@ -38,9 +44,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="flex flex-col md:flex-row min-h-screen bg-gray-100 relative">
-    <div class="w-full flex justify-between lg:hidden p-2">
-     
-
+    <div class="w-full flex justify-between lg:hidden p-2 mb-7">
       <button
         v-if="route.name !== 'login'"
         @click.stop="sidebarOpen = !sidebarOpen"
@@ -62,7 +66,10 @@ onBeforeUnmount(() => {
         </svg>
       </button>
 
-       <TimeDisplay />
+         <div class="flex gap-4">
+          <modeIcon />
+          <logoutIcon />
+        </div>
     </div>
 
     <div
@@ -81,7 +88,16 @@ onBeforeUnmount(() => {
       @close="sidebarOpen = false"
     />
 
-    <main class="flex-1">
+    <main class="flex-1 mx-8" >
+      <div class=" py-3 border-b  justify-between p-2 items-center hidden lg:flex mb-7">
+        <TimeDisplay />
+
+        <div class="flex gap-4">
+          <modeIcon />
+          <logoutIcon />
+        </div>
+      </div>
+
       <RouterView />
     </main>
   </div>

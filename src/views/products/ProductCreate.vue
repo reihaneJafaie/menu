@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[80%] mx-auto my-7">
+  <div class="">
     <h1 class="text-xl font-bold mb-6">افزودن محصول جدید</h1>
 
     <form
