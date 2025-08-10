@@ -1,22 +1,20 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount, watch } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import Sidebar from "./components/shared/Sidebar.vue";
 import TimeDisplay from "./components/shared/TimeDisplay.vue";
 import modeIcon from './components/icons/mod.vue';
-import logoutIcon from './components/icons/logout.vue'
-
+import logoutIcon from './components/icons/logout.vue';
 
 const route = useRoute();
+const router = useRouter();
+
 const sidebarOpen = ref(false);
-const sidebarRef = ref(null); // 1. تعریف ref برای سایدبار
-
-
-
-// ... (توابع تبدیل تاریخ و آپدیت زمان که قبلاً بود)
+const sidebarRef = ref(null);
+const showLogoutModal = ref(false); // وضعیت باز/بسته بودن مدال خروج
 
 function handleClickOutside(e) {
-  const sidebarEl = sidebarRef.value?.$el || sidebarRef.value; // استفاده از ref به جای document.querySelector
+  const sidebarEl = sidebarRef.value?.$el || sidebarRef.value;
   const buttonEl = e.target.closest("button");
 
   if (
@@ -29,6 +27,11 @@ function handleClickOutside(e) {
   }
 }
 
+function confirmLogout() {
+  // اینجا می‌تونی لاجیک خروج رو بزاری (مثلا حذف توکن)
+  router.push("/login");
+}
+
 watch(route, () => {
   sidebarOpen.value = false;
 });
@@ -36,7 +39,6 @@ watch(route, () => {
 onMounted(() => {
   document.addEventListener("click", handleClickOutside);
 });
-
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
 });
@@ -44,6 +46,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="flex flex-col md:flex-row min-h-screen bg-gray-100 relative">
+    <!-- نوار بالا موبایل -->
     <div class="w-full flex justify-between lg:hidden p-2 mb-7">
       <button
         v-if="route.name !== 'login'"
@@ -66,18 +69,20 @@ onBeforeUnmount(() => {
         </svg>
       </button>
 
-         <div class="flex gap-4">
-          <modeIcon />
-          <logoutIcon />
-        </div>
+      <div class="flex gap-4">
+        <modeIcon />
+        <logoutIcon @click="showLogoutModal = true" class="cursor-pointer" />
+      </div>
     </div>
 
+    <!-- بک‌دراپ موبایل -->
     <div
       v-if="sidebarOpen"
       @click="sidebarOpen = false"
       class="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
     ></div>
 
+    <!-- سایدبار -->
     <Sidebar
       v-if="route.name !== 'login'"
       ref="sidebarRef"
@@ -88,17 +93,42 @@ onBeforeUnmount(() => {
       @close="sidebarOpen = false"
     />
 
-    <main class="flex-1 mx-8" >
-      <div class=" py-3 border-b  justify-between p-2 items-center hidden lg:flex mb-7">
+    <!-- محتوای اصلی -->
+    <main class="flex-1 mx-8">
+      <div class="py-3 border-b justify-between p-2 items-center hidden lg:flex mb-7">
         <TimeDisplay />
 
         <div class="flex gap-4">
           <modeIcon />
-          <logoutIcon />
+          <logoutIcon @click="showLogoutModal = true" class="cursor-pointer" />
         </div>
       </div>
 
       <RouterView />
     </main>
+
+    <!-- مدال خروج -->
+    <div
+      v-if="showLogoutModal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+        <h2 class="text-lg font-semibold mb-4">آیا مطمئنی میخوای خارج بشی؟</h2>
+        <div class="flex justify-center gap-4">
+          <button
+            @click="confirmLogout"
+            class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+          >
+            بله
+          </button>
+          <button
+            @click="showLogoutModal = false"
+            class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+          >
+            خیر
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
