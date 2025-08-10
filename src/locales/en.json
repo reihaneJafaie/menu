@@ -1,0 +1,11 @@
+{
+   "projectName": "Vira Admin",
+   "card": {
+     "cycle": "cycle",
+     "interval": "interval"
+   },
+   "sectionName" : "sectionName",
+   "numberOfDevice" : "numberOfDevice"
+
+ }
+ 
